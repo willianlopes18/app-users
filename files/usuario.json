@@ -1,0 +1,15 @@
+{
+  "cadastro_usuario":{
+    "dados":{
+      "usuario":{
+          "nome":"Willian",
+          "sobrenome":"Lopes",
+          "CPF":"09656264908" ,
+          "sexo":"M",
+          "email":"Willian.lopes@hotmail.com",
+          "senha":"123",
+          "nascimento":"1997/04/11"
+      }
+    }
+  }
+}
