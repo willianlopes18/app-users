@@ -80,12 +80,6 @@ module.exports = function(app){
   };
 
   app.ListaUsuarios = function(req,res){ 
-    var requerente = auth(app).DecodificaToken(req);
-    if(requerente.payload.login){
-      console.log(requerente.payload.login);
-    }else{
-      console.log("opa algo errado");
-    }
     var connection = app.persistencia.ConnectionFactory();
     var UsuarioDao = new app.persistencia.UsuarioDao(connection);    
     UsuarioDao.lista(function(erro,resultado){

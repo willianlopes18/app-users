@@ -5,8 +5,8 @@ var atob    = require('atob');
 module.exports 	= function(app){
 	app.VerificaCliente = function(req,res,next){
 		const convenio = req.headers['convenio-app'];
+
 		const connection = app.persistencia.ConnectionFactory();
-		
 		const ConvenioDao = new app.persistencia.ConvenioDao(connection);
 		
 		ConvenioDao.verificaCliente(convenio,function(erro,resultado){
@@ -18,6 +18,7 @@ module.exports 	= function(app){
 		})
 		
 	}
+	
 	app.Autentica = function(req,res){
 		var user = ({
 			login: req.body.user.login,
