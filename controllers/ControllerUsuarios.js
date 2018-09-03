@@ -53,7 +53,7 @@ module.exports = function(app){
           UsuarioDao.salva(usuario, function(erro, resultado){
             if(erro){
               console.log('Erro ao inserir no banco:' + erro);
-              res.status(500).send(erro);
+              res.status(500).send("Tente novamente mais tarde");
             } else {
               usuario.id = resultado.insertId;
               console.log('usuario criado');
