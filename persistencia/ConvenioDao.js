@@ -2,7 +2,7 @@ function ConvenioDao(connection) {
     this._connection = connection;
 }
 
-ConvenioDao.prototype.verificaCliente = function (convenio,callback) {
+ConvenioDao.prototype.verificarCliente = function (convenio,callback) {
 	this._connection.query('select * from tblConvenio where tblConvenio_ClienteHash_StrL = ?', [convenio],callback);	
 }
 

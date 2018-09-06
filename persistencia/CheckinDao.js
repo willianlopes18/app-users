@@ -7,16 +7,16 @@ function fillCheckin(checkin){
 	dados = {
         tblEvento_Codigo_Id:checkin.idEvento,
         tblUsuario_Codigo_Id:checkin.idUsuario,
-        tblCheckin_DtRegistro_Dat:checkin.data
+        tblCheckin_Registro_Dat:checkin.data
 	};
 	return dados;
 }
 
-CadastroCheckinDao.prototype.salva = function(cadastroCheckin,callback) {
+CadastroCheckinDao.prototype.salvar = function(cadastroCheckin,callback) {
 	this._connection.query('INSERT INTO tblCheckin SET ?', fillCheckin(cadastroCheckin), callback);
 }
 
-CadastroCheckinDao.prototype.lista = function(callback) {
+CadastroCheckinDao.prototype.listar = function(callback) {
     this._connection.query('select * from tblCheckin',callback);
 }
 

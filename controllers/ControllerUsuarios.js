@@ -3,7 +3,7 @@ var auth    = require('./ControllerAuth');
 
 module.exports = function(app){
   
-  app.ConfirmaUsuario = function(req, res){
+  app.ConfirmarUsuario = function(req, res){
     var usuario = {};
     
     usuario.id = req.params.id;;
@@ -12,7 +12,7 @@ module.exports = function(app){
     var connection = app.persistencia.ConnectionFactory();
     var UsuarioDao = new app.persistencia.UsuarioDao(connection);
     
-    UsuarioDao.confirma(usuario, function(erro){
+    UsuarioDao.confirmar(usuario, function(erro){
       if (erro){
         res.status(500);
         return;
@@ -23,12 +23,10 @@ module.exports = function(app){
     
   };
   
-  app.CadastraUsuario = function(req, res){
+  app.CadastrarUsuario = function(req, res){
     
-    var solicitacao = req.body["cadastro_usuario"];
-    
-    if (solicitacao.dados) {
-      var usuario = solicitacao.dados.usuario;
+    if (req.body["cadastro_usuario"]) {
+      var usuario = req.body["cadastro_usuario"].dados;
       var validaUsuario = {email:usuario.email};
       
       console.log('processando uma requisicao de um novo usuario'); 
@@ -36,7 +34,7 @@ module.exports = function(app){
       var connection = app.persistencia.ConnectionFactory();
       var UsuarioDao = new app.persistencia.UsuarioDao(connection);
       
-      UsuarioDao.validaDados(validaUsuario,function(erro,resultado){      
+      UsuarioDao.validarDados(validaUsuario,function(erro,resultado){      
         if(resultado.length > 0){
           res.status(401).send("Esse e-mail já está cadastrado!");
           return;
@@ -45,7 +43,7 @@ module.exports = function(app){
           usuario.cadastro  = new Date;
           usuario.senha     = crypto.createHash('md5').update(usuario.senha).digest("hex");
           
-          UsuarioDao.salva(usuario, function(erro, resultado){
+          UsuarioDao.salvar(usuario, function(erro, resultado){
             if(erro){
               console.log('Erro ao inserir no banco:' + erro);
               res.status(500).send("Tente novamente mais tarde");
@@ -71,6 +69,8 @@ module.exports = function(app){
         }
         
       });
+    }else{
+      res.sendStatus(501);
     }
   };
   

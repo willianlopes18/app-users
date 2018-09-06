@@ -5,19 +5,19 @@ function CadastroEventoDao(connection) {
 function fillEvent(event){
 	
 	dados = {
-		tblEvento_Codigo_Id,
+		// tblEvento_Codigo_Id, **Campo AutoIncremento**
         tblEvento_Nome_StrL:event.nome,
-        tblEvento_DtInicio_Dat:event.dataInicio,
-        tblEvento_DtFim_Dat:event.dataFim
+        tblEvento_Inicio_Dat:event.Inicio,
+        tblEvento_Fim_Dat:event.Fim
 	};
 	return dados;
 }
 
-CadastroEventoDao.prototype.salva = function(cadastroEvento,callback) {
+CadastroEventoDao.prototype.salvar = function(cadastroEvento,callback) {
 	this._connection.query('INSERT INTO tblEvento SET ?', fillEvent(cadastroEvento), callback);
 }
 
-CadastroEventoDao.prototype.lista = function(callback) {
+CadastroEventoDao.prototype.listar = function(callback) {
     this._connection.query('select * from tblEvento',callback);
 }
 
